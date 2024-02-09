@@ -22,6 +22,8 @@
   },
   "include": [
     "src/**/*",
-    ".eslintrc.cjs"],
+    "types.d.ts",
+    ".eslintrc.cjs",
+  "tailwind.config.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

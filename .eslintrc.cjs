@@ -4,11 +4,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: [
-    'airbnb',
-    'airbnb-typescript',
-    'plugin:import/typescript',
-  ],
+  extends: ['airbnb', 'airbnb-typescript', 'plugin:import/typescript', 'plugin:storybook/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -22,7 +18,7 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'linebreak-style': 'off',
-    semi: 'off', // Disable the core ESLint semi rule
+    semi: 'off',
     '@typescript-eslint/semi': ['error', 'never'],
     indent: ['error', 2, { SwitchCase: 1 }],
     'no-trailing-spaces': 'error',
