@@ -7,43 +7,64 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
-interface UserGH {
-  login: 'string'
-  id: 'number'
-  name: 'string'
-  avatar_url: 'string'
-  bio?: 'string'
-  followers?: 'number'
-  following?: 'number'
-  public_repos?: 'number'
-  repositories: Repository[]
+// Object in the graphQL API
+interface RepositoryNode {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  stargazers: {
+    totalCount: number;
+  };
+  forks: {
+    totalCount: number;
+  };
+  primaryLanguage?: {
+    name: string;
+  };
+  owner: {
+    login: string;
+    id: string;
+  };
 }
 
+interface UserGH {
+  login: string
+  id: number
+  name: string
+  avatar_url: string
+  bio?: string
+  location?: string
+  followers?: number
+  following?: number
+  public_repos?: number
+  repositories: Repository[]
+  starredRepositories: number
+  starsRecieved : number
+}
+type Suggestion = Pick<UserGH, 'login' | 'name' | 'avatar_url'>
 interface Repository {
-  id:'number'
-  name: 'string'
-  description: 'string'
-  html_url: 'string'
-  branches: Branch[]
-  commits: Commit[]
-  stargazers_count: 'number'
-  forks_count: 'number'
-  language: 'string'
+  id: number
+  name: string
+  description: string
+  html_url: string
+  branches: number
+  owner: UserGH
+  commits?: number
+  stargazers_count?: number
+  forks_count?: number
+  language: string
 }
 
 interface Branch {
-  name: 'string'
-}
-
-interface Commit {
-  sha: 'string'
+  name: string
 }
 
 interface GitHubContextType {
-  searchUser: (username: string) => Promise<void>;
   userDetails: UserGH | null;
-  suggestion: strig[] | [];
-  fecthSuggerstion: (value: string) => Promise<void>;
+  suggestions: Suggestion[] | [];
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  loadSuggestions: (term: string) => void;
   repositories: Repository[];
-  selectUser: (username: string) => Promise<void>;
 }

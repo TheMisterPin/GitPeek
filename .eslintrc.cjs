@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
+
   extends: ['airbnb', 'airbnb-typescript', 'plugin:import/typescript', 'plugin:storybook/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {

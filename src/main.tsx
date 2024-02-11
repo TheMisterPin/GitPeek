@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { GitHubProvider } from './context/githubContext'
+import { GitHubProvider } from './hooks/githubContext'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
