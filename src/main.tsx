@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import './index.css'
-import { GitHubProvider } from './hooks/githubContext'
+
+import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 
   <React.StrictMode>
-    <GitHubProvider>
-      {' '}
-      <App />
-    </GitHubProvider>
+
+    <App />
+
   </React.StrictMode>,
 )

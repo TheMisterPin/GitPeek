@@ -1,13 +1,46 @@
 interface ImportMetaEnv {
-  readonly VITE_API_URL: string
-  readonly VITE_API_KEY: string
+  readonly VITE_API_URL: string;
+  readonly VITE_API_KEY: string;
 }
 
 interface ImportMeta {
-  readonly env: ImportMetaEnv
+  readonly env: ImportMetaEnv;
 }
 
-// Object in the graphQL API
+// Objects from the graphQL API
+
+interface SuggestionNode {
+  login: string;
+  avatarUrl: string;
+  name: string;
+}
+interface UserNode {
+  login: string;
+  id: string;
+  name: string;
+  avatarUrl: string;
+  bio?: string;
+  location?: string;
+  followers: {
+    totalCount: number;
+  };
+  following: {
+    totalCount: number;
+  };
+  repositories: {
+    totalCount: number;
+    edges: Array<{
+      node: RepositoryNode;
+    }>;
+  };
+  object: {
+    text?: string;
+  };
+  starredRepositories: {
+    totalCount: number;
+  };
+}
+
 interface RepositoryNode {
   id: string;
   name: string;
@@ -19,45 +52,50 @@ interface RepositoryNode {
   forks: {
     totalCount: number;
   };
+  issues: {
+    totalCount: number;
+  };
+  object: {
+    text?: string;
+  };
   primaryLanguage?: {
     name: string;
   };
   owner: {
     login: string;
     id: string;
+    avatarUrl: string;
   };
 }
 
 interface UserGH {
-  login: string
-  id: number
-  name: string
-  avatar_url: string
-  bio?: string
-  location?: string
-  followers?: number
-  following?: number
-  public_repos?: number
-  repositories: Repository[]
-  starredRepositories: number
-  starsRecieved : number
+  login: string;
+  id: string;
+  name: string;
+  avatar_url: string;
+  bio?: string;
+  location?: string;
+  followers?: number;
+  readme?: string;
+  following?: number;
+  public_repos?: number;
+  repositories: Repository[];
+  starredRepositories: number;
+  starsReceived: number;
 }
 type Suggestion = Pick<UserGH, 'login' | 'name' | 'avatar_url'>
 interface Repository {
-  id: number
-  name: string
-  description: string
-  html_url: string
-  branches: number
-  owner: UserGH
-  commits?: number
-  stargazers_count?: number
-  forks_count?: number
-  language: string
-}
-
-interface Branch {
-  name: string
+  id: string;
+  name: string;
+  description: string;
+  html_url: string;
+  owner: Pick<UserNode, 'login' | 'name' | 'avatar_url'>;
+  commits?: number;
+  stargazers_count?: number;
+  forks_count?: number;
+  issues_count?: number;
+  readme?: string;
+  language: string;
 }
 
 interface GitHubContextType {

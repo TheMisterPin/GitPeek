@@ -18,6 +18,7 @@ function AppRoutes(): JSX.Element {
       <Route path={SUGGESTIONS} element={<SuggestionsPage />} />
       <Route path={ERROR} element={<ErrorPage />} />
       <Route path="/" element={<Navigate to={HOME} />} />
+      <Route path="/" element={<HomePage />} />
 
     </Routes>
 

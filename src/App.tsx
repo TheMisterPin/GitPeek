@@ -1,15 +1,17 @@
-import SearchBar from './components/searchbar'
-import RepoList from './components/repositoriesList'
-import UserCard from './components/userCard'
+import { BrowserRouter } from 'react-router-dom'
+
 import { GitHubProvider } from './hooks/githubContext'
+import AppRouter from './routes/appRouter'
 
 function App() {
   return (
 
     <GitHubProvider>
-      <SearchBar />
-      <UserCard />
-      <RepoList />
+      <BrowserRouter>
+        {' '}
+        <AppRouter />
+      </BrowserRouter>
+
     </GitHubProvider>
 
   )
