@@ -6,6 +6,14 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+interface ButtonProps {
+  link?: string;
+  text?: string;
+  icon?: string;
+  type?: "submit" | "button" | "reset" | undefined;
+  onClick?: () => void;
+  onSubmit?: () => void;
+}
 
 // Objects from the graphQL API
 
@@ -96,8 +104,8 @@ interface Repository {
   description: string;
   owner: Pick<UserNode, 'login' | 'name' | 'avatarUrl'>;
   commits?: number;
-  stargazers_count?: number;
-  forks_count?: number;
+  stargazersCount?: number;
+  forksCount?: number;
   issues_count?: number;
   readme?: string;
   language: string;
@@ -111,4 +119,13 @@ interface GitHubContextType {
   handleSuggestions: (term: string) => void;
   repositories: Repository[];
   isLoading: boolean;
+}
+interface MockUserCardProps {
+  user: UserGH;
+}
+
+interface AnimationProps {
+  isShowing?: boolean;
+  duration?: number;
+  children?: React.ReactNode;
 }

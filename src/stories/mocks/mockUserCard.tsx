@@ -1,7 +1,3 @@
-interface MockUserCardProps {
-  user: UserGH
-}
-
 function MockUserCard({ user }: MockUserCardProps) {
   return (
     <div className="w-3/12 flex flex-col bg-card-grey p-4">

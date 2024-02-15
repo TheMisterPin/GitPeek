@@ -3,10 +3,10 @@ import * as routes from './paths'
 import * as components from '../pages'
 
 const {
-  HomePage, ResultsPage, SuggestionsPage, ErrorPage,
+  HomePage, ResultsPage, ErrorPage,
 } = components
 const {
-  HOME, RESULTS, SUGGESTIONS, ERROR,
+  HOME, RESULTS, ERROR,
 } = routes
 
 function AppRoutes(): JSX.Element {
@@ -15,10 +15,8 @@ function AppRoutes(): JSX.Element {
     <Routes>
       <Route path={HOME} element={<HomePage />} />
       <Route path={RESULTS} element={<ResultsPage />} />
-      <Route path={SUGGESTIONS} element={<SuggestionsPage />} />
       <Route path={ERROR} element={<ErrorPage />} />
       <Route path="/" element={<Navigate to={HOME} />} />
-
     </Routes>
 
   )

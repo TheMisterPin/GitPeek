@@ -2,14 +2,6 @@
 import styled from 'styled-components'
 import tw from 'twin.macro'
 
-interface ButtonProps {
-  link?: string;
-  text?: string;
-  icon?: string;
-  type?: 'submit' | 'button' | 'reset' | undefined;
-  onClick?: () => void;
-  onSubmit?: () => void;
-}
 
 const TwButton = styled.button`
   border: none;

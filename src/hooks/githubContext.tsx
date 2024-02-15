@@ -1,6 +1,7 @@
 import React, {
   createContext, useContext, useState, useMemo, useEffect,
 } from 'react'
+import { redirect } from 'react-router-dom'
 import { debounce } from 'lodash'
 import { getSuggestions, getUserData } from '../services/apiGraphQl.service'
 import handleError from '../utils/errorHandler'
@@ -37,12 +38,13 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
       handleError(error)
     } finally {
       setIsLoading(false)
+      redirect('/results')
     }
   }
 
   useEffect(() => {
     if (searchTerm) {
-     fetchUserDetails()
+      fetchUserDetails()
     }
   }, [searchTerm])
 

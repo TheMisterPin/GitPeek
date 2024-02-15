@@ -24,11 +24,7 @@ export const fadeOut = css`
   }
   animation: fadeOut 0.5s ease-out forwards;
 `
-interface AnimationProps {
-  isShowing?: boolean
-  duration?: number
-  children?: React.ReactNode
-}
+
 export function FadeIn({ children, isShowing, duration = 500 } : AnimationProps) {
   return (
     <div

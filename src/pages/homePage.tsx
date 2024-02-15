@@ -1,9 +1,9 @@
 import {
-  PageContainer, SearchBar, Shadow, TextBig, UserCard,
+  LogoImage,
+  PageContainer, SearchBar, Shadow, TextBig,
 } from '../components'
+import ResultsButton from '../components/styled-components/ui/resultsButton'
 import { useGitHub } from '../hooks/githubContext'
-
-import { logo } from '../utils/images'
 
 export default function HomePage() {
   const { userDetails } = useGitHub()
@@ -11,22 +11,19 @@ export default function HomePage() {
   // Directly return the conditional rendering result
   return userDetails ? (
     <PageContainer>
-      <img src={logo} alt="GitPeek logo" />
-      <Shadow className="top-[45%]">
+      <LogoImage />
+      <Shadow className="top-[45%] xl:top-12">
         <TextBig>Look up users in GitHub</TextBig>
         <SearchBar />
       </Shadow>
-      <Shadow className="bottom-20 w-[61%] gap-10 h-[25%]">
-<UserCard/>
-        {/* {suggestions.map((suggestion) => (
-          <TextBig key={suggestion.login} className="z-20">{suggestion.login}</TextBig>
-        ))} */}
-      </Shadow>
+
+      <ResultsButton />
+
     </PageContainer>
   ) : (
     <PageContainer>
-      <img src={logo} alt="GitPeek logo" />
-      <Shadow className="top-[45%]">
+      <LogoImage />
+      <Shadow className="top-[45%] xl:top-12">
         <TextBig>Look up users in GitHub</TextBig>
         <SearchBar />
       </Shadow>
