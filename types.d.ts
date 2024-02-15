@@ -13,7 +13,7 @@ interface SuggestionNode {
   login: string;
   avatarUrl: string;
   name: string;
-  location? : string;
+  location?: string;
 }
 interface UserNode {
   login: string;
@@ -84,12 +84,16 @@ interface UserGH {
   starredRepositories: number;
   starsReceived: number;
 }
-type Suggestion = Pick<UserGH, 'login' | 'name' | 'avatarUrl'>
+type Suggestion = {
+  login: string;
+  avatarUrl: string;
+  location: string;
+}
 interface Repository {
   id: string;
   name: string;
-  description: string;
   html_url: string;
+  description: string;
   owner: Pick<UserNode, 'login' | 'name' | 'avatarUrl'>;
   commits?: number;
   stargazers_count?: number;
@@ -104,7 +108,7 @@ interface GitHubContextType {
   suggestions: Suggestion[] | [];
   searchTerm: string;
   setSearchTerm: (term: string) => void;
-  loadSuggestions: (term: string) => void;
+  handleSuggestions: (term: string) => void;
   repositories: Repository[];
   isLoading: boolean;
 }

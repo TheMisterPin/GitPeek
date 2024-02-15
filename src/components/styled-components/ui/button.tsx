@@ -1,7 +1,6 @@
 /* eslint-disable react/require-default-props */
 import styled from 'styled-components'
 import tw from 'twin.macro'
-import { fadeIn, fadeOut } from '../layout/animations'
 
 interface ButtonProps {
   link?: string;
@@ -10,14 +9,11 @@ interface ButtonProps {
   type?: 'submit' | 'button' | 'reset' | undefined;
   onClick?: () => void;
   onSubmit?: () => void;
-  animation?: 'fadein' | 'fadeout';
 }
 
-const TwButton = styled.button<{ animation?: 'fadein' | 'fadeout' }>`
+const TwButton = styled.button`
   border: none;
-
-  ${({ animation }) => animation === 'fadein' && fadeIn}
-  ${({ animation }) => animation === 'fadeout' && fadeOut}
+  height: 46px;
 `
 
 const TwA = styled.a``
@@ -25,13 +21,15 @@ const Icon = tw.img`
 object-contain
 h-10`
 
-export function Button({
-  link, text, type, onClick, onSubmit, icon, animation,
+function Button({
+  link, text, type, onClick, onSubmit, icon,
 }: ButtonProps) {
   return (
-    <TwButton type={type} onClick={onClick} onSubmit={onSubmit} animation={animation}>
+    <TwButton type={type} onClick={onClick} onSubmit={onSubmit}>
       {icon && <Icon src={icon} alt="" />}
       {link ? <TwA href={link}>{text}</TwA> : text}
     </TwButton>
   )
 }
+
+export default Button

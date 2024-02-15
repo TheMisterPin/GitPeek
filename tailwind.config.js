@@ -21,9 +21,8 @@ export default {
       },
 
       colors: {
-        'card-grey': '#24292F',
-        'blue-letter': '#539BF5',
-
+        backgroundStart: '#39dfcc',
+        backgroundEnd: '#ff6ff0',
       },
     },
   },

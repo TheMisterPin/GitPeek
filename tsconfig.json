@@ -28,7 +28,7 @@
     "src/**/*.ts",
     "types.d.ts",
     ".eslintrc.cjs",
-    "tailwind.config.js", "src/routes",
+    "tailwind.config.js", "src/routes", "discarded/useLayout.tsx",
   ],
   "references": [
     {

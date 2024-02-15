@@ -1,13 +1,15 @@
-import { useGitHub } from '../hooks/githubContext'
+import { Button } from '../..'
+import { useGitHub } from '../../../hooks/githubContext'
+import { searchIcon } from '../../../utils/images'
 
 function SearchBar() {
-  const { loadSuggestions, setSearchTerm } = useGitHub()
+  const { handleSuggestions, setSearchTerm } = useGitHub()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
 
     if (value) {
-      loadSuggestions(value)
+      handleSuggestions(value)
     }
   }
 
@@ -19,7 +21,7 @@ function SearchBar() {
   }
 
   return (
-    <div>
+    <div className="">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -27,7 +29,7 @@ function SearchBar() {
           onChange={handleChange}
           placeholder="Search GitHub Users..."
         />
-        <button type="submit">Search</button>
+        <Button type="submit" icon={searchIcon} />
       </form>
     </div>
   )

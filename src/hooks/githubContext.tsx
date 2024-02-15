@@ -2,8 +2,8 @@ import React, {
   createContext, useContext, useState, useMemo, useEffect,
 } from 'react'
 import { debounce } from 'lodash'
-import { useNavigate } from 'react-router-dom'
-import { getSuggestions, getSearchTerm } from '../services/apiGraphQl.service'
+import { redirect } from 'react-router-dom'
+import { getSuggestions, getUserData } from '../services/apiGraphQl.service'
 import handleError from '../utils/errorHandler'
 
 const intialState: GitHubContextType = {
@@ -11,7 +11,7 @@ const intialState: GitHubContextType = {
   suggestions: [],
   searchTerm: '',
   setSearchTerm: () => { },
-  loadSuggestions: () => { },
+  handleSuggestions: () => { },
   repositories: [],
   isLoading: false,
 }
@@ -24,17 +24,17 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
   const [searchTerm, setSearchTerm] = useState('')
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+
   // const [languages, setLanguages]= useState<Repository['language'][]>([])
 
   const fetchUserDetails = async () => {
     try {
-      const userData = await getSearchTerm(searchTerm)
+      const userData = await getUserData(searchTerm)
 
       setIsLoading(true)
       setUserDetails(userData)
       setRepositories(userData.repositories)
-    } catch (error : any) {
+    } catch (error: any) {
       handleError(error)
     } finally {
       setIsLoading(false)
@@ -43,22 +43,11 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
 
   useEffect(() => {
     if (searchTerm) {
-      switch (suggestions.length) {
-        case 0:
-          navigate('/error')
-          break
-        case 1:
-          fetchUserDetails()
-          navigate('/results')
-          break
-        default:
-          navigate('/suggestion')
-          break
-      }
+     fetchUserDetails()
     }
   }, [searchTerm])
 
-  const loadSuggestions = debounce(async (value: string) => {
+  const handleSuggestions = debounce(async (value: string) => {
     if (value.length > 0) {
       setIsLoading(true)
       const newSuggestions = await getSuggestions(value)
@@ -79,7 +68,7 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
     searchTerm,
     setSearchTerm,
     suggestions,
-    loadSuggestions,
+    handleSuggestions,
     isLoading,
   }), [userDetails, repositories])
 

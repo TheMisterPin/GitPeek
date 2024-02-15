@@ -26,11 +26,6 @@ query getUserData($login: String!) {
     following {
       totalCount
     }
-    object(expression: "HEAD:README.md") {
-            ... on Blob {
-              text
-            }
-          }
     repositories(first: 10, orderBy: {field: STARGAZERS, direction: DESC}, ownerAffiliations: OWNER) {
       totalCount
       edges {
@@ -90,20 +85,15 @@ query getUserData($login: String!) {
 `
 
 const suggestionQuery = `
-query getUserSuggestions($login: String!) {
-  search(query: $login, type: USER, first: 5) {
-    edges {
-      node {
-        ... on User {
-          login
-          avatarUrl
-          name
-        }
-      }
-    }
-  }
+query getSuggestions($login: String!) {
+user(login: $login) {
+    login
+    id
+    name
+    avatarUrl
 }
-`
+}
+`;
 const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
   login: userNode.login,
   id: userNode.id,
@@ -139,14 +129,12 @@ const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
   ),
 })
 
-export const getSearchTerm = async (login: string): Promise<UserGH> => {
-  const user = login.toLowerCase()
-
+export const getUserData = async (login: string): Promise<UserGH> => {
   try {
     const response = await getApi.post('', {
       query: searchQuery,
       variables: {
-        login: user,
+        login,
       },
     })
 
@@ -154,6 +142,8 @@ export const getSearchTerm = async (login: string): Promise<UserGH> => {
       throw new Error('User not found.')
     }
     const userNode: UserNode = response.data.data.user
+
+    console.log(userNode)
     const userDetails: UserGH = adaptUserNodeToUserGH(userNode)
 
     return userDetails
@@ -165,7 +155,7 @@ export const getSearchTerm = async (login: string): Promise<UserGH> => {
 
 export const getSuggestions = async (
   login: string,
-): Promise<Array<Suggestion>> => {
+):Promise<Suggestion[]> => {
   try {
     const response = await getApi.post('', {
       query: suggestionQuery,

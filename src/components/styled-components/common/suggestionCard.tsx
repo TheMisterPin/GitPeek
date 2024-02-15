@@ -1,23 +1,11 @@
-import {
-  Avatar, Card, CardContent, Typography, Skeleton,
-} from '@mui/material'
-import { useGitHub } from '../../../hooks/githubContext'
-
-function SuggestionCard(suggestion: Suggestion) {
-  const { isLoading } = useGitHub()
-  const { login, avatarUrl } = suggestion
+function SuggestionCard(suggestion : Suggestion) {
+  const { avatarUrl, login } = suggestion
 
   return (
-    <Card>
-      <Avatar>
-        {isLoading ? <Skeleton variant="circular" width={40} height={40} /> : avatarUrl}
-      </Avatar>
-      <CardContent>
-        <Typography variant="subtitle1">
-          {isLoading ? <Skeleton width="80%" /> : login}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className="h1/6">
+      <img src={avatarUrl} alt="Avatar" />
+      <h2>{login}</h2>
+    </div>
   )
 }
 

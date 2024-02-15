@@ -1,5 +1,5 @@
-export const searchIcon = 'https://img.icons8.com/dusk/64/search--v1.png'
-export const logo = ''
+export const searchIcon = 'https://img.icons8.com/dusk/search--v1.png'
+export const logo = 'https://res.cloudinary.com/dl1fw2gx2/image/upload/t_BgRemoved/v1707978925/gitpeeklogo.png'
 export const repoIcon = 'https://img.icons8.com/parakeet/48/book.png'
 export const starIcon = 'https://icons8.com/icon/7EoumkdcLQEo/star'
 export const forkIcon = 'https://icons8.com/icon/rT0QUnswQvfg/connect'
