@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import handleError from '../utils/errorHandler'
 // Call to the GH GraphSQL api
 const getApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -107,7 +108,7 @@ const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
   login: userNode.login,
   id: userNode.id,
   name: userNode.name,
-  avatar_url: userNode.avatarUrl,
+  avatarUrl: userNode.avatarUrl,
   bio: userNode.bio,
   location: userNode.location,
   followers: userNode.followers.totalCount,
@@ -122,7 +123,7 @@ const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
     owner: {
       login: node.owner.login,
       id: node.owner.id,
-      avatar_url: node.owner.avatarUrl,
+      avatarUrl: node.owner.avatarUrl,
       name: node.owner.login,
     },
     stargazers_count: node.stargazers.totalCount,
@@ -138,28 +139,26 @@ const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
   ),
 })
 
-export const getSearchTerm = async (user: string): Promise<UserGH> => {
+export const getSearchTerm = async (login: string): Promise<UserGH> => {
+  const user = login.toLowerCase()
+
   try {
-    const response = await getApi.post<{ data: { user: UserNode } }>(
-      'graphql',
-      {
-        query: searchQuery,
-        variables: { login: user },
+    const response = await getApi.post('', {
+      query: searchQuery,
+      variables: {
+        login: user,
       },
-    )
+    })
 
     if (!response.data.data.user) {
       throw new Error('User not found.')
     }
-
     const userNode: UserNode = response.data.data.user
-
-    // Adapt UserNode to UserGH
     const userDetails: UserGH = adaptUserNodeToUserGH(userNode)
 
     return userDetails
   } catch (error: any) {
-    toast.error(`Error calling GitHub GraphQL API: ${error.message}`)
+    handleError(error)
     throw error
   }
 }

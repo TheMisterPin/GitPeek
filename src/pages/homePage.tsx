@@ -1,15 +1,19 @@
-import RepoList from '../components/repositoriesList'
-import SearchBar from '../components/searchbar'
-import UserCard from '../components/userCard'
+import {
+  PageContainer, PageTitle, Shadow, TextBig,
+} from '../components'
+import SearchButton from '../components/styled-components/ui/searchButton'
 
 export default function HomePage() {
   return (
-    <div>
-      welcome to GitPeek
-      <SearchBar />
-      <UserCard />
-      <RepoList />
 
-    </div>
+    <PageContainer>
+      <Shadow>
+        <PageTitle> GitPeek </PageTitle>
+        <TextBig> Look up users in  GitHub </TextBig>
+
+        <SearchButton />
+
+      </Shadow>
+    </PageContainer>
   )
 }

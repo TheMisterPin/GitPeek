@@ -29,11 +29,3 @@ function MockRepoCard({ repository }: RepoCardProps) {
 }
 
 export default MockRepoCard
-
-    function undefined({}) {
-      return (<p>
-        {' '}
-        {repository.issues_count}
-      </p>);
-    }
-  

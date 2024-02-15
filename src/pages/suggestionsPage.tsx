@@ -1,8 +1,15 @@
-export default function SuggestionPage() {
-  return (
-    <div>
-      {' '}
+import { PageContainer } from '../components'
+import { useGitHub } from '../hooks/githubContext'
 
-    </div>
+export default function SuggestionPage() {
+  const { repositories } = useGitHub()
+
+  return (
+    <PageContainer>
+      {
+        repositories.map((repo) => (
+          <div key={repo.id}>{repo.name}</div>))
+      }
+    </PageContainer>
   )
 }

@@ -1,14 +1,14 @@
 // src/stories/MockUserCard.stories.tsx
 
 import { Meta, StoryObj } from '@storybook/react'
-import MockUserCard from '../mocks/mockUserCard'
+import MockUserCard from './mocks/mockUserCard'
 
 const meta: Meta<typeof MockUserCard> = {
   title: 'Components/MockUserCard',
   component: MockUserCard,
   args: {
     user: {
-      avatar_url: 'https://example.com/avatar.jpg',
+      avatarUrl: 'https://example.com/avatar.jpg',
       name: 'Default User',
       login: 'defaultuser',
       location: 'Internet',
@@ -33,7 +33,7 @@ export const Default: MockUserCardStory = {}
 export const CustomUser: MockUserCardStory = {
   args: {
     user: {
-      avatar_url: 'https://example.com/custom-avatar.jpg',
+      avatarUrl: 'https://example.com/custom-avatar.jpg',
       name: 'Custom User',
       login: 'customuser',
       location: 'Somewhere',

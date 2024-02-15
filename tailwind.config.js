@@ -7,8 +7,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'akaya-kanadaka': ['"Akaya Kanadaka"', 'serif'],
+        akaya: ['Akaya Kanadaka', 'serif'],
         bangers: ['Bangers', 'cursive'],
+      },
+      keyframes: {
+        skeleton: {
+          '0%, 100%': { backgroundPosition: '200% 0' },
+          '50%': { backgroundPosition: '-200% 0' },
+        },
+      },
+      animation: {
+        skeleton: 'skeleton 1.5s ease-in-out infinite',
       },
 
       colors: {

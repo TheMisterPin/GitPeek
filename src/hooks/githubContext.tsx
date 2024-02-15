@@ -2,7 +2,9 @@ import React, {
   createContext, useContext, useState, useMemo, useEffect,
 } from 'react'
 import { debounce } from 'lodash'
+import { useNavigate } from 'react-router-dom'
 import { getSuggestions, getSearchTerm } from '../services/apiGraphQl.service'
+import handleError from '../utils/errorHandler'
 
 const intialState: GitHubContextType = {
   userDetails: null,
@@ -11,6 +13,7 @@ const intialState: GitHubContextType = {
   setSearchTerm: () => { },
   loadSuggestions: () => { },
   repositories: [],
+  isLoading: false,
 }
 
 const GitHubContext = createContext<GitHubContextType>(intialState)
@@ -20,29 +23,47 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
   const [repositories, setRepositories] = useState<Repository[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  // const [languages, setLanguages]= useState<Repository['language'][]>([])
+
+  const fetchUserDetails = async () => {
+    try {
+      const userData = await getSearchTerm(searchTerm)
+
+      setIsLoading(true)
+      setUserDetails(userData)
+      setRepositories(userData.repositories)
+    } catch (error : any) {
+      handleError(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
     if (searchTerm) {
-      const fetchUserDetails = async () => {
-        try {
-          const userData = await getSearchTerm(searchTerm)
-
-          setUserDetails(userData)
-          console.log(userData)
-          setRepositories(userData.repositories)
-        } catch (error) {
-          console.error('Failed to fetch user details:', error)
-        }
+      switch (suggestions.length) {
+        case 0:
+          navigate('/error')
+          break
+        case 1:
+          fetchUserDetails()
+          navigate('/results')
+          break
+        default:
+          navigate('/suggestion')
+          break
       }
-
-      fetchUserDetails()
     }
   }, [searchTerm])
 
   const loadSuggestions = debounce(async (value: string) => {
-    if (value.length > 0) { // Assuming you want to load suggestions after the 4th character
+    if (value.length > 0) {
+      setIsLoading(true)
       const newSuggestions = await getSuggestions(value)
 
+      setIsLoading(false)
       setRepositories([])
       setUserDetails(null)
 
@@ -59,6 +80,7 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
     setSearchTerm,
     suggestions,
     loadSuggestions,
+    isLoading,
   }), [userDetails, repositories])
 
   return (

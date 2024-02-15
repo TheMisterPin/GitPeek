@@ -1,0 +1,7 @@
+export { PageContainer } from './styled-components/layout/index'
+export { Shadow } from './styled-components/layout/index'
+export { Button } from './styled-components/ui/button'
+export { default as SuggestionCard } from './styled-components/common/suggestionCard'
+export { default as UserCard } from './styled-components/common/userCard'
+export { PageTitle, TextBig } from './styled-components/ui'
+export { default as SearchBar } from './searchbar'

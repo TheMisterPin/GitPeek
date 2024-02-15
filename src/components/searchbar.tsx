@@ -1,4 +1,4 @@
-import { useGitHub } from '../hooks/githubContext' // Adjust the import path as needed
+import { useGitHub } from '../hooks/githubContext'
 
 function SearchBar() {
   const { loadSuggestions, setSearchTerm } = useGitHub()
@@ -19,15 +19,17 @@ function SearchBar() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="searchInput"
-        onChange={handleChange}
-        placeholder="Search GitHub Users..."
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="searchInput"
+          onChange={handleChange}
+          placeholder="Search GitHub Users..."
+        />
+        <button type="submit">Search</button>
+      </form>
+    </div>
   )
 }
 

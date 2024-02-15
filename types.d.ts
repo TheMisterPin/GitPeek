@@ -13,6 +13,7 @@ interface SuggestionNode {
   login: string;
   avatarUrl: string;
   name: string;
+  location? : string;
 }
 interface UserNode {
   login: string;
@@ -72,7 +73,7 @@ interface UserGH {
   login: string;
   id: string;
   name: string;
-  avatar_url: string;
+  avatarUrl: string;
   bio?: string;
   location?: string;
   followers?: number;
@@ -83,13 +84,13 @@ interface UserGH {
   starredRepositories: number;
   starsReceived: number;
 }
-type Suggestion = Pick<UserGH, 'login' | 'name' | 'avatar_url'>
+type Suggestion = Pick<UserGH, 'login' | 'name' | 'avatarUrl'>
 interface Repository {
   id: string;
   name: string;
   description: string;
   html_url: string;
-  owner: Pick<UserNode, 'login' | 'name' | 'avatar_url'>;
+  owner: Pick<UserNode, 'login' | 'name' | 'avatarUrl'>;
   commits?: number;
   stargazers_count?: number;
   forks_count?: number;
@@ -105,4 +106,5 @@ interface GitHubContextType {
   setSearchTerm: (term: string) => void;
   loadSuggestions: (term: string) => void;
   repositories: Repository[];
+  isLoading: boolean;
 }
