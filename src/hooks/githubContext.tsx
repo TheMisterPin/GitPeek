@@ -2,7 +2,6 @@ import React, {
   createContext, useContext, useState, useMemo, useEffect,
 } from 'react'
 import { debounce } from 'lodash'
-import { redirect } from 'react-router-dom'
 import { getSuggestions, getUserData } from '../services/apiGraphQl.service'
 import handleError from '../utils/errorHandler'
 
