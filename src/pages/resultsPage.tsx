@@ -12,7 +12,6 @@ import { HOME } from '../routes/paths'
 export default function ResultsPage() {
   const { repositories, userDetails } = useGitHub()
 
-
   return userDetails ? (
 
     <PageContainer className="flex flex-col">

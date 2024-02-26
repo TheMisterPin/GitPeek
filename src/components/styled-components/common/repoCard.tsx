@@ -30,6 +30,7 @@ function RepoCard(repo: Repository) {
 
         <TextMed>{language}</TextMed>
         <Icon className="w-[10%]" src={issueIcon} />
+        <Icon className="w-[10%]" src={`https://skillicons.dev/icons?i=${language}`} />
 
         <TextMed>{issuesCount}</TextMed>
 
@@ -37,7 +38,6 @@ function RepoCard(repo: Repository) {
       </InfoElement>
     </RepoContainer>
   )
-  // src = {`https://skillicons.dev/icons?i=${language}`
 }
 
 export default RepoCard
