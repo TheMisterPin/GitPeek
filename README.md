@@ -100,4 +100,4 @@ GitPeek is continuously evolving, and we're excited about the roadmap ahead. Her
 soon you'll be able to change the theme of GitPeek! 
 
 
-We're open to ideas and contributions from the community! If you have suggestions or want to contribute to any of the upcoming features, please follow our contributing guidelines and join us in making GitPeek even better.
+We're open to ideas and contributions from the community! If you have suggestions or want to contribute to any of the upcoming features, please follow our contributing guidelines and join us in making GitPeek even better!
