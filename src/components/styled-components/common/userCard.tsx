@@ -1,4 +1,5 @@
 import { useGitHub } from '../../../hooks/githubContext'
+import { FlexBox } from '../layout'
 import { PageTitle } from '../ui'
 import { Card, Avatar } from './Card'
 
@@ -9,11 +10,13 @@ function UserCard() {
     (
       userDetails
         ? (
-          <Card>
-            <Avatar src={userDetails.avatarUrl} />
-            <PageTitle>{userDetails.login}</PageTitle>
+          <FlexBox>
+            <Card>
+              <Avatar src={userDetails.avatarUrl} />
+              <PageTitle>{userDetails.login}</PageTitle>
 
-          </Card>
+            </Card>
+          </FlexBox>
         )
         : null
     )

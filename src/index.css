@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 *{
     font-family: sans-serif;
 }
 
+.bangers{
+    font-family: 'bangers'
+}
+
+.akaya {
+    font-family: "Akaya Kanadaka", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }

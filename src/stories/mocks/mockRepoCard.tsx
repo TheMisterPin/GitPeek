@@ -1,10 +1,16 @@
-import { issueIcon, repoIcon, starIcon } from '../../images'
-import { RepoContainer } from '../layout'
-import {
-  Icon, InfoElement, TextBig, TextMed,
-} from '../ui'
+/* eslint-disable import/no-cycle */
+/* eslint-disable @typescript-eslint/naming-convention */
 
-function RepoCard(repo: Repository) {
+import { TextBig } from '../../components'
+import { Icon, TextMed } from '../../components/styled-components/ui'
+import { MockRepo } from './mockProps'
+import {
+  issueIcon, repoIcon, starIcon,
+} from '../../components/images'
+import { InfoElement } from './mockResultsPage'
+import { RepoContainer } from '../../components/styled-components/layout'
+
+function MockRepoCard(repo: MockRepo) {
   const {
     name, description, language, issuesCount, stargazersCount,
   } = repo
@@ -37,7 +43,6 @@ function RepoCard(repo: Repository) {
       </InfoElement>
     </RepoContainer>
   )
-  // src = {`https://skillicons.dev/icons?i=${language}`
 }
 
-export default RepoCard
+export default MockRepoCard

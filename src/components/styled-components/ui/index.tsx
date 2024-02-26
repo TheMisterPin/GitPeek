@@ -10,7 +10,7 @@ export const PageTitle = styled.h1`
 `
 
 export const TextBig = styled.p`
-  font-size: clamp(1.3rem, 2.5vw, 3rem);
+  font-size: clamp(1rem, 2.5vw, 3rem);
   font-family: 'Akaya Kanadaka', serif;
   color: #381f03; 
   text-align: center;
@@ -24,7 +24,7 @@ export const TextWhite = styled.p`
   font-weight: bold;
 `
 export const TextMed = styled.p`
-  font-size: clamp(0.7rem, 1.5vw, 2rem);
+  font-size: clamp(1rem, 1.5vw, 2rem);
   font-family: 'Akaya Kanadaka', serif;
   color: #381f03; 
   font-weight: bold;
@@ -39,13 +39,9 @@ border-8
 w-32
 `
 export const Icon = tw.img`
-
-mt-1
-
 object-contain
 `
 export const InfoElement = tw.div`
 text-center
 justify-around
 flex`
-export const RepoGrid = tw.div` w-[85%] grid xl:grid-cols-3 gap-4 absolute top-[45%] xl:bottom-24 overflow-auto`

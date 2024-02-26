@@ -80,13 +80,19 @@ query getUserData($login: String!) {
 `
 
 const suggestionQuery = `
-query getUserData($login: String!) {
-user(login: $login) {
-    login
-    id
-    name
-    avatarUrl
-}
+query SearchUsers($query: String!) {
+  search(query: $query, type: USER, first: 5) {
+    edges {
+      node {
+        ... on User {
+          login
+          id
+          name
+          avatarUrl
+        }
+      }
+    }
+  }
 }
 `
 const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
@@ -113,7 +119,7 @@ const adaptUserNodeToUserGH = (userNode: UserNode): UserGH => ({
     },
     stargazersCount: node.stargazers.totalCount,
     forksCount: node.forks.totalCount,
-    issues_count: node.issues.totalCount,
+    issuesCount: node.issues.totalCount,
     language: node.primaryLanguage ? node.primaryLanguage.name : 'Unknown',
   })),
   starredRepositories: userNode.starredRepositories.totalCount,
@@ -145,24 +151,24 @@ export const getUserData = async (login: string): Promise<UserGH> => {
   }
 }
 
-export const getSuggestions = async (login: string): Promise<Suggestion[]> => {
+export const getSuggestions = async (login: String): Promise<Suggestion[]> => {
   try {
     const response = await getApi.post('', {
       query: suggestionQuery,
-      variables: { login },
+      variables: {
+        query: `user:${login}`,
+      },
     })
 
-    const suggestions = response.data.data.search.edges.map(
-      (node: SuggestionNode) => ({
-        login: node.login,
-        avatarUrl: node.avatarUrl,
-        name: node.name,
-      }),
-    )
+    const suggestions = response.data.data.search.edges.map((edge: { node: SuggestionNode }) => ({
+      login: edge.node.login,
+      avatarUrl: edge.node.avatarUrl,
+      name: edge.node.name,
+    }))
 
     return suggestions
   } catch (error: any) {
-    toast.error('Error calling GitHub GraphQL API:', error.message)
+    toast.error(`Error calling GitHub GraphQL API: ${error.message}`)
     throw error
   }
 }

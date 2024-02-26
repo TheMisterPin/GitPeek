@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { Button } from '../..'
 import { useGitHub } from '../../../hooks/githubContext'
 import { searchIcon } from '../../images'
@@ -30,6 +31,7 @@ function SearchBar() {
         placeholder="Search GitHub Users..."
       />
       <Button type="submit" icon={searchIcon} />
+
     </form>
   )
 }

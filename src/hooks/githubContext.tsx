@@ -1,8 +1,8 @@
+/* eslint-disable import/no-cycle */
 import React, {
   createContext, useContext, useState, useMemo, useEffect,
 } from 'react'
 import { redirect } from 'react-router-dom'
-import { debounce } from 'lodash'
 import { getSuggestions, getUserData } from '../services/apiGraphQl.service'
 import handleError from '../utils/errorHandler'
 
@@ -11,6 +11,7 @@ const intialState: GitHubContextType = {
   suggestions: [],
   searchTerm: '',
   setSearchTerm: () => { },
+  sliceAndFetch: () => { },
   handleSuggestions: () => { },
   repositories: [],
   isLoading: false,
@@ -42,14 +43,17 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
     }
   }
 
-  useEffect(() => {
-    if (searchTerm) {
+  useEffect(
+    () => {
+      if (searchTerm && suggestions) { setSearchTerm(suggestions[0].login) }
       fetchUserDetails()
-    }
-  }, [searchTerm])
+      redirect('/results')
+    },
+    [searchTerm],
+  )
 
-  const handleSuggestions = debounce(async (value: string) => {
-    if (value.length > 0) {
+  const handleSuggestions = async (value: string) => {
+    if (value.length > 3) {
       setIsLoading(true)
       const newSuggestions = await getSuggestions(value)
 
@@ -61,12 +65,19 @@ export function GitHubProvider({ children }: { children: React.ReactNode }): JSX
     } else {
       setSuggestions([])
     }
-  }, 300)
+  }
+  const sliceAndFetch = () => {
+    if (searchTerm && suggestions.length === 0) {
+      const newSearchTerm = searchTerm.slice(0, -2)
 
+      setSearchTerm(newSearchTerm)
+    }
+  }
   const value = useMemo(() => ({
     userDetails,
     repositories,
     searchTerm,
+    sliceAndFetch,
     setSearchTerm,
     suggestions,
     handleSuggestions,

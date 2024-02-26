@@ -5,6 +5,7 @@ const TwBox = tw.section`
   sm:h-3/5
   sm:w-3/5
   xl:h-1/5
+  md:h-1/5
   xl:w-6/12
   p-3
   py-9
@@ -13,7 +14,6 @@ const TwBox = tw.section`
   flex-col
   justify-around
   items-center
-  absolute
   
  
 `
@@ -23,7 +23,6 @@ xl:top-44 h-[60px] xl:w-2/5 md:w-2/5 w-[95%] flex justify-between px-8 top-52
 `
 
 export const Info = styled(InfoBox)`
-position:absolute;
   box-shadow:
     rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
     rgba(19, 26, 32, 0.28) 0px 35px 75px -35px;
@@ -37,7 +36,7 @@ position:absolute;
   );
   border-color: rgb(213, 220, 226) rgb(213, 220, 226) rgb(184, 194, 204);
 `
-export const FlexBox = styled(InfoBox)`
+export const FlexBox = styled.div`
 
   box-shadow:
     rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
@@ -64,6 +63,19 @@ export const GreenBox = styled(InfoBox)`
     circle,
     rgba(16, 171, 7, 1) 65%,
     rgba(4, 32, 2, 1) 100%
+  );
+`
+export const RedBox = styled.div`
+  box-shadow:
+    rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
+    rgba(19, 26, 32, 0.28) 0px 35px 75px -35px;
+  border-radius: 10px;
+  border: 1px solid;
+  background: rgb(255, 0, 0); /* Solid red background */
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 0, 1) 65%, /* Bright red */
+    rgba(139, 0, 0, 1) 100% /* Dark red */
   );
 `
 
@@ -105,3 +117,27 @@ sm:h-full sm:object-contain sm:top-0
 `
 export const Card = tw.div`
 flex gap-20 object-center `
+
+const ListContainer = tw.li`
+`
+
+export const RepoContainer = styled(ListContainer)`
+box-shadow:
+rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
+rgba(19, 26, 32, 0.28) 0px 35px 75px -35px;
+background: radial-gradient(
+circle,
+rgba(254, 205, 103, 1) 65%,
+rgba(255, 111, 0, 0.9164040616246498) 100%
+);
+
+`
+const Grid = tw.ul`
+grid
+
+`
+
+export const RepoGrid = styled(Grid)`
+grid-template-rows: repeat(auto-fit, 1fr);
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;`

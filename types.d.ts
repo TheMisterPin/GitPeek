@@ -10,7 +10,7 @@ interface ButtonProps {
   link?: string;
   text?: string;
   icon?: string;
-  type?: "submit" | "button" | "reset" | undefined;
+  type?: 'submit' | 'button' | 'reset' | undefined;
   onClick?: () => void;
   onSubmit?: () => void;
 }
@@ -106,7 +106,7 @@ interface Repository {
   commits?: number;
   stargazersCount?: number;
   forksCount?: number;
-  issues_count?: number;
+  issuesCount?: number;
   readme?: string;
   language: string;
 }
@@ -115,6 +115,7 @@ interface GitHubContextType {
   userDetails: UserGH | null;
   suggestions: Suggestion[] | [];
   searchTerm: string;
+  sliceAndFetch: () => void
   setSearchTerm: (term: string) => void;
   handleSuggestions: (term: string) => void;
   repositories: Repository[];
