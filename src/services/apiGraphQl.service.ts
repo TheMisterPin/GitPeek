@@ -4,8 +4,9 @@ import handleError from '../utils/errorHandler'
 // Call to the GH GraphSQL api
 const getApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  token : import.meta.env.VITE_API_KEY
   headers: {
-    Authorization: `bearer ${import.meta.env.VITE_API_KEY}`,
+    Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   },
 })
