@@ -2,9 +2,10 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import handleError from '../utils/errorHandler'
 // Call to the GH GraphSQL api
+ const token = import.meta.env.VITE_API_KEY
 const getApi = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  token : import.meta.env.VITE_API_KEY,
+
   headers: {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
